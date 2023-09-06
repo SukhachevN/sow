@@ -13,7 +13,15 @@ const App = () => {
 
     const isConnected = account && isChainIdCorrect;
 
-    const content = isConnected ? <Connected /> : <ConnectButton />;
+    const Content = () => {
+        if (!window.ethereum) {
+            return 'Для работы с приложением установите MetaMask';
+        }
+
+        if (!isLoaded) return <Loader text="Инициализация приложения" />;
+
+        return isConnected ? <Connected /> : <ConnectButton />;
+    };
 
     useEffect(() => {
         // чтобы избежать блика кнопки подключения
@@ -29,7 +37,7 @@ const App = () => {
 
     return (
         <main className={styles.container}>
-            {!isLoaded ? <Loader text="Инициализация приложения" /> : content}
+            <Content />
         </main>
     );
 };

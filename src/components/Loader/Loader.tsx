@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import styles from './Loader.module.scss';
 
 type LoaderType = {

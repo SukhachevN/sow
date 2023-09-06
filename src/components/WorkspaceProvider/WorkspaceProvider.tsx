@@ -7,7 +7,6 @@ import {
     showLoadContractAlert,
     showSwitchChainAlert,
 } from '~/utils/helpers';
-
 import {
     ADDRESS,
     CHAIN_ID,
