@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import ConnectButton from '~/components/ConnectButton';
 import Connected from '~/components/Connected';
 import { useWorkspace } from '~/components/WorkspaceProvider/WorkspaceProvider.uitls';
@@ -8,13 +9,27 @@ import styles from './App.module.scss';
 const App = () => {
     const { account, isChainIdCorrect } = useWorkspace();
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
     const isConnected = account && isChainIdCorrect;
 
-    if (typeof account !== 'string') return <Loader text="Initializing app" />;
+    const content = isConnected ? <Connected /> : <ConnectButton />;
+
+    useEffect(() => {
+        // чтобы избежать блика кнопки подключения
+        const timer = setTimeout(
+            () => setIsLoaded(typeof account === 'string'),
+            300
+        );
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [account]);
 
     return (
         <main className={styles.container}>
-            {isConnected ? <Connected /> : <ConnectButton />}
+            {!isLoaded ? <Loader text="Инициализация приложения" /> : content}
         </main>
     );
 };

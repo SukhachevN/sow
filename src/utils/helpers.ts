@@ -1,15 +1,16 @@
 import { BigNumber } from 'ethers';
 
-export const showInstallMetaMaskAlert = () => alert('Please, install MetaMask');
+export const showInstallMetaMaskAlert = () =>
+    alert('Пожалуйста, установите MetaMask');
 
 export const showSwitchChainAlert = (message: string) =>
-    alert(`Cant switch chain. ${message}`);
+    alert(`Не удалось изменить сеть. ${message}`);
 
 export const showLoadContractAlert = (message: string) =>
-    alert(`Cant load smart contract. ${message}`);
+    alert(`Не удалось загрузить контракт. ${message}`);
 
 export const showLoadBalanceAlert = (message: string) =>
-    alert(`Cant load balance. ${message}`);
+    alert(`Не удалось загрузить баланс. ${message}`);
 
 export const DECIMALS = 18;
 

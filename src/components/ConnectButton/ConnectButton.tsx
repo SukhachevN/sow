@@ -4,6 +4,8 @@ import {
 } from '~/utils/helpers';
 import { useWorkspace } from '~/components/WorkspaceProvider/WorkspaceProvider.uitls';
 
+import styles from './ConnectButton.module.scss';
+
 const ConnectButton = () => {
     const { isChainIdCorrect, switchChain } = useWorkspace();
 
@@ -25,7 +27,11 @@ const ConnectButton = () => {
         }
     };
 
-    return <button onClick={onClick}>Connect MetaMask</button>;
+    return (
+        <button onClick={onClick} className={styles.button}>
+            Подключить через MetaMask
+        </button>
+    );
 };
 
 export default ConnectButton;
