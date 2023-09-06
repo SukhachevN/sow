@@ -5,7 +5,7 @@ import { convertBalance, showLoadBalanceAlert } from '~/utils/helpers';
 import { useWorkspace } from '~/components/WorkspaceProvider/WorkspaceProvider.uitls';
 import Loader from '~/components/Loader';
 
-import { DECIMALS } from './Connected.constants';
+import styles from './Connected.module.scss';
 
 const Connected = () => {
     const { account, contract } = useWorkspace();
@@ -43,8 +43,7 @@ const Connected = () => {
                 const isReceiving = to.toLowerCase() === account;
 
                 if (isSending || isReceiving) {
-                    const realAmount =
-                        +amount.toString() / Math.pow(10, DECIMALS);
+                    const realAmount = convertBalance(amount);
 
                     setBalance((prev) => {
                         if (typeof prev !== 'number') return prev;
@@ -65,15 +64,25 @@ const Connected = () => {
     }, [contract, account]);
 
     return (
-        <div>
-            <div>Wallet: {account}</div>
-            <div>
-                Balance:&nbsp;
-                {typeof balance === 'number' ? (
-                    balance
-                ) : (
-                    <Loader text="loading balance" />
-                )}
+        <div className={styles.container}>
+            <div className={styles.field}>
+                Адрес:
+                <div title={account ?? ''} className={styles.withOverflow}>
+                    {account}
+                </div>
+            </div>
+            <div className={styles.field}>
+                Баланс:
+                <div
+                    title={String(balance ?? '')}
+                    className={styles.withOverflow}
+                >
+                    {typeof balance === 'number' ? (
+                        balance
+                    ) : (
+                        <Loader text="загрузка" />
+                    )}
+                </div>
             </div>
         </div>
     );
