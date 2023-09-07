@@ -75,7 +75,7 @@ const WorkspaceProvider: FC<PropsWithChildren> = ({ children }) => {
                     }
                 }
             } else {
-                alert;
+                showInstallMetaMaskAlert();
             }
         };
 
